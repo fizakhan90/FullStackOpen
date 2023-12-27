@@ -1,1 +1,37 @@
+sequenceDiagram
+    participant browser
+    participant server
 
+    Note right of browser : user adds a note
+    Note right of browser : It is an HTTP POST request to the server address new_note
+
+    browser->>server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    Note left of server : he server responds with HTTP status code 302
+    server-->>browser: HTTP Status Code(URL Redirect)
+    deactivate server
+
+    browser->>server:  HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    Note right of browser : the server asks the browser to do a new HTTP GET request
+    server-->>browser: HTML document of notes page(200 status code)
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: main.css
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: main.js
+    deactivate server
+
+    
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+   
